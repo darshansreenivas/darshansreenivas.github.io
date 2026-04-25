@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Darshan Sreenivasamurthy</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #21262d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --tag-bg: #1f2937;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      height: 56px;
+    }
+    nav .logo { font-weight: 700; font-size: 1rem; letter-spacing: -0.3px; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav ul a { color: var(--muted); font-size: 0.875rem; font-weight: 500; }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Layout ── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+
+    section { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+    section:last-child { border-bottom: none; }
+
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      padding: 3rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    #hero .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.75rem;
+    }
+    #hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    #hero .subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    .hero-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .hero-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* ── About ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+    .about-card h3 { font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── Achievements ── */
+    .achievement-list { display: flex; flex-direction: column; gap: 1rem; }
+    .achievement {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0 0.75rem;
+      align-items: start;
+    }
+    .achievement .bullet {
+      width: 6px;
+      height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+      justify-self: center;
+    }
+    .achievement p { font-size: 0.9rem; color: var(--text); }
+
+    /* ── Experience ── */
+    .exp-list { display: flex; flex-direction: column; gap: 2.5rem; }
+    .exp-item { position: relative; padding-left: 1.25rem; border-left: 2px solid var(--border); }
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 0.4rem;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .exp-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.2rem; }
+    .exp-header h3 { font-size: 1rem; font-weight: 700; }
+    .exp-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.6rem; }
+    .exp-role { font-size: 0.85rem; color: var(--accent2); font-weight: 500; }
+    .exp-date { font-size: 0.8rem; color: var(--muted); }
+    .exp-desc { font-size: 0.875rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .stack-line { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .stack-line strong { color: var(--text); }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .exp-bullets li { font-size: 0.875rem; color: var(--text); padding-left: 1rem; position: relative; }
+    .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--muted); }
+
+    /* ── Education ── */
+    .edu-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .edu-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .edu-item h3 { font-size: 0.95rem; font-weight: 600; }
+    .edu-item p { font-size: 0.8rem; color: var(--muted); }
+    .edu-date { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+    /* ── Others ── */
+    .others-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    @media (max-width: 500px) { .others-grid { grid-template-columns: 1fr; } }
+    .other-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+    .other-item .dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Contact ── */
+    #contact { padding-bottom: 3rem; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+    .contact-card span { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); display: block; margin-bottom: 0.25rem; }
+    .contact-card a, .contact-card p { font-size: 0.875rem; color: var(--text); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">DS</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div id="hero">
+  <div class="container">
+    <p class="eyebrow">Based in San Francisco</p>
+    <h1>Darshan<br>Sreenivasamurthy</h1>
+    <p class="subtitle">Senior Backend &amp; Distributed Systems Engineer with 10+ years building infrastructure at Apple scale — storage platforms, Kubernetes, service discovery, and workflow automation.</p>
+    <div class="hero-links">
+      <a href="mailto:dtumkursreenivasamurthy@gmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Email
+      </a>
+      <a href="https://github.com/darshansreenivas" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <a href="https://contribcard.cncf.io/darshansreenivas" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        CNCF
+      </a>
+      <a href="https://machinelearning.apple.com/research/prose2policy" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Research
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <h2>About</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>Tech Stack</h3>
+        <div class="tag-list">
+          <span class="tag">Java</span>
+          <span class="tag">Python</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">REST / gRPC</span>
+          <span class="tag">Kafka</span>
+          <span class="tag">PostgreSQL</span>
+<span class="tag">CLI tooling</span>
+        </div>
+      </div>
+      <div class="about-card">
+        <h3>Domains</h3>
+        <div class="tag-list">
+          <span class="tag">Distributed Systems</span>
+          <span class="tag">Storage Infrastructure</span>
+          <span class="tag">Service Discovery</span>
+          <span class="tag">Kubernetes / CSI</span>
+          <span class="tag">Backend APIs</span>
+          <span class="tag">Workflow Automation</span>
+          <span class="tag">LLM Pipelines</span>
+          <span class="tag">Policy-as-Code</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <h2>Key Achievements</h2>
+      <div class="achievement-list">
+        <div class="achievement"><div class="bullet"></div><p>Built Apple backend/storage infrastructure supporting stateful platforms; StatefulPod CRD handles ~6.5M API calls/day across 102 clusters.</p></div>
+        <div class="achievement"><div class="bullet"></div><p>Primary author and technical lead for ACI Disco, a distributed service-discovery platform for Apple database infrastructure across Kubernetes, PIE Compute, AWS, and Carnival.</p></div>
+        <div class="achievement"><div class="bullet"></div><p>Architected aDB Enterprise, an enterprise storage lifecycle platform with auditable onboarding, CLI workflows, and security checkpoints.</p></div>
+        <div class="achievement"><div class="bullet"></div><p>~10 merged PRs into core kubernetes/kubernetes, including Declarative Validation migrations across storage, networking, admission, and certificate APIs.</p></div>
+        <div class="achievement"><div class="bullet"></div><p>Co-authored Apple ML Research <a href="https://machinelearning.apple.com/research/prose2policy" target="_blank" rel="noopener">Prose2Policy</a> — translating natural-language access policies into executable OPA/Rego with schema, lint, compile, and test guardrails.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="container">
+    <h2>Experience</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3>Apple</h3>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-role">Senior Software Engineer</span>
+          <span class="exp-date">2016 – Present · Cupertino, CA</span>
+        </div>
+        <p class="exp-desc">Engineering backend platforms for storage lifecycle management, service discovery, workflow automation, and reliability-critical datacenter infrastructure.</p>
+        <p class="stack-line"><strong>Stack:</strong> Java, Python, Kubernetes, REST/gRPC, Cassandra, Kafka, Solr, Valkey, ZooKeeper, FoundationDB, PostgreSQL, DNS, CLI tooling</p>
+        <ul class="exp-bullets">
+          <li>Architected aDB Enterprise as a central lifecycle-management layer for datacenter storage, including controlled onboarding, standardized state transitions, and production admission checks.</li>
+          <li>Co-architected ISC ObjectStore, a multi-cluster S3-compatible metadata platform with IAM/RBAC integration, Kafka-based permission synchronization, and quota enforcement.</li>
+          <li>Primary author/maintainer of Storage Controller, automating delayed deletion, maintenance, and controller-driven orchestration for Kubernetes-based storage systems.</li>
+          <li>Led ACI Disco service discovery with REST-backed API, custom DNS service, and CLI tools, enabling reliable database discovery across Kubernetes, PIE Compute, AWS, and Carnival.</li>
+          <li>Supported stateful infrastructure for Cassandra, Kafka, Solr, Valkey, ZooKeeper, FoundationDB, and PostgreSQL; one CRD path handles ~6.5M API calls/day across 102 clusters.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3>Kubernetes / CNCF</h3>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-role">Open Source Contributor</span>
+          <span class="exp-date">2024 – Present · Remote</span>
+        </div>
+        <p class="exp-desc">Contributing to core Kubernetes API correctness, storage reliability, and contributor experience for a globally used cloud-native platform.</p>
+        <p class="stack-line"><strong>Stack:</strong> Go, Kubernetes API Machinery, CSI, kind, Prow, TestGrid, validation-gen, storage APIs</p>
+        <ul class="exp-bullets">
+          <li>Merged ~10 PRs into kubernetes/kubernetes for Declarative Validation migrations across StorageClass, RuntimeClass, VolumeAttachment, admission policy bindings, ipBlock, and CSR usages.</li>
+          <li>Designed and implemented Volume Group Snapshotter stress testing to exercise concurrent and repeated snapshot creation under load, improving race and cleanup defect detection.</li>
+          <li>Contributed to CSI ecosystem maintenance, release tooling, Prow/TestGrid job configuration, and contributor education through NCO and LWKD.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3>Apple ML Research</h3>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-role">Co-author</span>
+          <span class="exp-date">2024 – Present · Cupertino, CA</span>
+        </div>
+        <p class="exp-desc">Applied LLM systems to security policy automation and policy-as-code workflows for authorization and compliance use cases.</p>
+        <p class="stack-line"><strong>Stack:</strong> LLM pipelines, OPA/Rego, policy-as-code, schema validation, test automation, security authorization</p>
+        <ul class="exp-bullets">
+          <li>Co-authored <a href="https://machinelearning.apple.com/research/prose2policy" target="_blank" rel="noopener">Prose2Policy</a>, a practical LLM pipeline that translates natural-language access policies into executable OPA/Rego policies.</li>
+          <li>Built reliability guardrails around policy generation, including structured extraction, schema validation, linting, compilation, automated test generation, and test execution.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3>Tesla</h3>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-role">Software Engineer</span>
+          <span class="exp-date">Oct 2015 – Mar 2016 · San Francisco Bay Area</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3>VMware</h3>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-role">Software Engineering Intern</span>
+          <span class="exp-date">Jun 2015 – Aug 2015 · San Francisco Bay Area</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <div class="container">
+    <h2>Education</h2>
+    <div class="edu-list">
+      <div class="edu-item">
+        <div>
+          <h3>University of California</h3>
+          <p>M.S., Software Engineering</p>
+        </div>
+        <span class="edu-date">2014 – 2015</span>
+      </div>
+      <div class="edu-item">
+        <div>
+          <h3>PES University</h3>
+          <p>B.E., Information Science and Engineering</p>
+        </div>
+        <span class="edu-date">2008 – 2012</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <h2>Community &amp; Service</h2>
+      <div class="others-grid">
+        <div class="other-item"><div class="dot"></div><span>Kubernetes / CNCF contributor</span></div>
+        <div class="other-item"><div class="dot"></div><span>Reviewer: ACM TOPS, SACMAT, ICLR workshop</span></div>
+        <div class="other-item"><div class="dot"></div><span>Judge/evaluator: SJSU SVIC, UC Davis Engineering Showcase</span></div>
+        <div class="other-item"><div class="dot"></div><span>New Contributor Orientation lead/presenter; LWKD contributor</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <h2>Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span>Email</span>
+        <a href="mailto:dtumkursreenivasamurthy@gmail.com">dtumkursreenivasamurthy@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <span>Location</span>
+        <p>San Francisco</p>
+      </div>
+      <div class="contact-card">
+        <span>GitHub</span>
+        <a href="https://github.com/darshansreenivas" target="_blank" rel="noopener">github.com/darshansreenivas</a>
+      </div>
+      <div class="contact-card">
+        <span>CNCF Contrib</span>
+        <a href="https://contribcard.cncf.io/darshansreenivas" target="_blank" rel="noopener">contribcard.cncf.io/darshansreenivas</a>
+      </div>
+      <div class="contact-card">
+        <span>ML Research</span>
+        <a href="https://machinelearning.apple.com/research/prose2policy" target="_blank" rel="noopener">Prose2Policy paper</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Darshan Sreenivasamurthy &mdash; darshansreenivas.github.io</p>
+</footer>
+
+</body>
+</html>
